@@ -1,0 +1,56 @@
+[
+  {
+    "waybillnumber": 38403,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "34829",
+          "keyword": "Rechnungsnummerb"
+        },
+        "totalValue": {
+          "value": "433234,32",
+          "keyword": "Total Value"
+        }
+      },
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "34829",
+          "keyword": "Rechnungsnummerb"
+        },
+        "totalValue": {
+          "value": "433234,32",
+          "keyword": "Total Value"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 38403,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "34829",
+          "keyword": "Rechnungsnummerb"
+        },
+        "totalValue": {
+          "value": "433234,32",
+          "keyword": "Total Value"
+        }
+      },
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "34829",
+          "keyword": "Rechnungsnummerb"
+        },
+        "totalValue": {
+          "value": "433234,32",
+          "keyword": "Total Value"
+        }
+      }
+    ]
+  }
+]
