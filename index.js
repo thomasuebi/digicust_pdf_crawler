@@ -32,31 +32,78 @@ pdf(dataBuffer, options).then(function(data) {
   const lowerCaseContent = data.text.toLowerCase()
   console.log(data.text)
   const numbers = getNumbers(lowerCaseContent)
+  const decimals = getDecimals(lowerCaseContent)
   const result = {}
-  Object.keys(keywords).forEach(keyword => {
-    console.log(keyword)
+  for (let [key, keyword] of Object.entries(keywords)) {
+    let value = ""
     switch (keyword.valueFormat) {
       case "number":
-        let value = ""
-        keyword.aliases.forEach(alias => {
-          getNearestNumber(numbers, keyword)
+        keyword.aliases.some(alias => {
+          const newValue = getNearestValue(
+            numbers,
+            getKeywordIndex(lowerCaseContent, alias)
+          )
+          if (newValue) {
+            value = newValue.value
+            return true
+          }
         })
-        result[keyword] = value
+        result[key] = value
+        break
+      case "incoterm":
+        const regexp = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS)/g
+        const matches = getMatches(data.text, regexp, 1)
+        result[key] = matches[0].value
+        break
+      //   case "weight":
+      //     keyword.aliases.some(alias => {
+      //       const newValue = getNearestValue(
+      //         getArrayItems(lowerCaseContent, ["kg", "kilogram", "pound", "lb"]),
+      //         getKeywordIndex(lowerCaseContent, alias)
+      //       )
+      //       if (newValue) {
+      //         value = newValue.value
+      //         return true
+      //       }
+      //     })
+      //     result[key] = value
+      case "decimal":
+        keyword.aliases.some(alias => {
+          const newValue = getNearestValue(
+            decimals,
+            getKeywordIndex(lowerCaseContent, alias)
+          )
+          if (newValue) {
+            value = newValue.value
+            return true
+          }
+        })
+        result[key] = value
+        break
     }
-  })
+  }
+  fs.writeFileSync("tmp/output.json", JSON.stringify(result))
   console.log(result)
-  //   const endValueIndex = getKeywordIndex(lowerCaseContent, "end value")
-  //   const endValue = getNearestNumber(numbers, endValueIndex).value
-  //   console.log("End value: " + endValue)
-
-  //   for (const match of matches) {
-  //     console.log("value: " + match.value)
-  //     console.log("index: " + match.index)
-  //   }
 })
 
 function getNumbers(text) {
+  const regexp = /(([0-9]{2})+[0-9]*)/gi
+  const matches = getMatches(text, regexp, 1)
+  return matches.sort((a, b) =>
+    a.index > b.index ? 1 : b.index > a.index ? -1 : 0
+  )
+}
+
+function getDecimals(text) {
   const regexp = /(((\d{1,3})[\.\,]?)+)/gi
+  const matches = getMatches(text, regexp, 1)
+  return matches.sort((a, b) =>
+    a.index > b.index ? 1 : b.index > a.index ? -1 : 0
+  )
+}
+
+function getArrayItems(text, array) {
+  const regexp = new RegExp("(" + array.join("|") + ")", "gi")
   const matches = getMatches(text, regexp, 1)
   return matches.sort((a, b) =>
     a.index > b.index ? 1 : b.index > a.index ? -1 : 0
@@ -77,8 +124,8 @@ function getMatches(string, regex, index) {
   return matches
 }
 
-function getNearestNumber(arr, index) {
+function getNearestValue(arr, index) {
   var i = arr.length
-  while (arr[--i].index > index);
+  while (arr[--i].index > index && i > 0);
   return arr[++i]
 }

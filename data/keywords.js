@@ -1,15 +1,19 @@
 module.exports = {
   totalValue: {
     aliases: ["end value", "total value", "totalvalue"],
-    valueFormat: "number"
+    valueFormat: "decimal"
   },
   weight: {
     aliases: ["weight"],
-    valueFormat: "number"
+    valueFormat: "decimal"
   },
   weightUnit: {
     aliases: ["weight unit", "weightunit", "unit"],
     valueFormat: "weight"
+  },
+  incoterm: {
+    aliases: [],
+    valueFormat: "incoterm"
   },
   airwayBill: {
     aliases: [
