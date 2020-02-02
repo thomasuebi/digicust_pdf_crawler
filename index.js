@@ -26,7 +26,7 @@ let options = {
   }
 }
 
-let dataBuffer = fs.readFileSync("sample.pdf")
+let dataBuffer = fs.readFileSync("tmp/input.pdf")
 
 pdf(dataBuffer, options).then(function(data) {
   const lowerCaseContent = data.text.toLowerCase()
