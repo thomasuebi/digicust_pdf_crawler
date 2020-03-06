@@ -1,0 +1,887 @@
+[
+  {
+    "waybillnumber": 789559645045,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "91470164",
+          "keyword": "Invoice No"
+        },
+        "totalValue": {
+          "value": "7,639.00",
+          "keyword": "End value"
+        },
+        "incoterms": {
+          "value": "CPT",
+          "keyword": "Terms of delivery"
+        },
+        "currency": {
+          "value": "USD",
+          "keyword": "currency"
+        },
+        "customsTarifNumber": {
+          "value": "85437090",
+          "keyword": "Customs tariff number"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "6,70",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "kg",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "789559645045",
+          "keyword": "TRK"
+        },
+        "cityOfReceiver": {
+          "value": "STANFORD",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "94305",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "Wien",
+          "keyword": "From"
+        },
+        "zipCodeOfShipper": {
+          "value": "1170",
+          "keyword": "From"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 771388637848,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "18-7678",
+          "keyword": "Invoice No"
+        },
+        "totalValue": {
+          "value": "1.872,00",
+          "keyword": "Total USD"
+        },
+        "incoterms": {
+          "value": "FCA",
+          "keyword": "Terms of Delivery"
+        },
+        "currency": {
+          "value": "USD",
+          "keyword": "Unit Price"
+        },
+        "customsTarifNumber": {
+          "value": "90273000",
+          "keyword": "HARMONIZED TARIFF CODE"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "1.00",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "771388637848",
+          "keyword": "TRK"
+        },
+        "cityOfReceiver": {
+          "value": "NORTH ATTLEBORO",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "02760",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "Wien",
+          "keyword": "From"
+        },
+        "zipCodeOfShipper": {
+          "value": "1200",
+          "keyword": "From"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 737103956153,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "90195070",
+          "keyword": "Number / Date"
+        },
+        "totalValue": {
+          "value": "3,628.80",
+          "keyword": "Final amount"
+        },
+        "incoterms": {
+          "value": "FCA",
+          "keyword": "Terms of delivery"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "Currency"
+        },
+        "customsTarifNumber": {
+          "value": "85419000",
+          "keyword": "Customs tariff number"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "10.9",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "737103956153",
+          "keyword": "TRK"
+        },
+        "cityOfReceiver": {
+          "value": "JIANGSU SHENG",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "213164",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "KLOSTERNEUBURG",
+          "keyword": "From"
+        },
+        "zipCodeOfShipper": {
+          "value": "3400",
+          "keyword": "From"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 411496211270,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "219244",
+          "keyword": "Invoice No"
+        },
+        "totalValue": {
+          "value": "1549.88",
+          "keyword": "Total Invoice Amount"
+        },
+        "incoterms": {
+          "value": "EXW",
+          "keyword": "Terms of Sale(Incoterm)"
+        },
+        "currency": {
+          "value": "USD",
+          "keyword": "Unit Price"
+        },
+        "customsTarifNumber": {
+          "value": "30021200",
+          "keyword": "Harm. Code"
+        },
+        "cityOfReceiver": {
+          "value": "FREDERICK",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "21704",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "Vienna",
+          "keyword": "FROM"
+        },
+        "zipCodeOfShipper": {
+          "value": "1030",
+          "keyword": "FROM"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "27.70",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "411496211270",
+          "keyword": "TRK"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 415924285504,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "90952120",
+          "keyword": "Invoice No"
+        },
+        "totalValue": {
+          "value": "5,620.80",
+          "keyword": "Total"
+        },
+        "incoterms": {
+          "value": "EXW",
+          "keyword": "Incoterms"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "Curr."
+        },
+        "customsTarifNumber": {
+          "value": "84149000",
+          "keyword": "Commodity Code"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "27.00",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "415924285504",
+          "keyword": "TRK"
+        },
+        "cityOfReceiver": {
+          "value": "LA PORTE",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "77572",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "wIEN",
+          "keyword": "From"
+        },
+        "zipCodeOfShipper": {
+          "value": "1220",
+          "keyword": "From"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 411496234926,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "240504",
+          "keyword": "Invoice No"
+        },
+        "totalValue": {
+          "value": "1868.35",
+          "keyword": "Total Invoice Amount"
+        },
+        "incoterms": {
+          "value": "EXW",
+          "keyword": "Terms of Sale"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "Total Inovice Amount"
+        },
+        "customsTarifNumber": {
+          "value": "3002120090",
+          "keyword": "Harm. Code"
+        },
+        "cityOfReceiver": {
+          "value": "SANTA CLARA",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "95051",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "Vienna",
+          "keyword": "From"
+        },
+        "zipCodeOfShipper": {
+          "value": "1030",
+          "keyword": "From"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "4.70",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "411496234926",
+          "keyword": "TRK"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 415163116459,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "03 Juni 2019",
+          "keyword": "Invoice No"
+        },
+        "totalValue": {
+          "value": "1690.00",
+          "keyword": "Total Invoice Value"
+        },
+        "incoterms": {
+          "value": "DAP",
+          "keyword": "Terms of Sale"
+        },
+        "currency": {
+          "value": "USD",
+          "keyword": "CURRENCY"
+        },
+        "customsTarifNumber": {
+          "value": "9102210000",
+          "keyword": "HS CODE"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "0.80",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "415163116459",
+          "keyword": "TRK"
+        },
+        "cityOfReceiver": {
+          "value": "POULSBO",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "98370",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "WIEN",
+          "keyword": "FROM"
+        },
+        "zipCodeOfShipper": {
+          "value": "1140",
+          "keyword": "FROM"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 485013103425,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "2019102581",
+          "keyword": "Invoice"
+        },
+        "totalValue": {
+          "value": "1,590.00",
+          "keyword": "Total(EUR)"
+        },
+        "incoterms": {
+          "value": "DAP",
+          "keyword": "Delivery Terms"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "Currency"
+        },
+        "customsTarifNumber": {
+          "value": "82081000",
+          "keyword": "Custom Tariff No"
+        },
+        "cityOfShipper": {
+          "value": "Ravne na Koroskem",
+          "keyword": "SIJ Ravne Systems d.o.o."
+        },
+        "zipCodeOfShipper": {
+          "value": "2390",
+          "keyword": "SIJ Ravne Systems d.o.o."
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "36.0",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "485013103425",
+          "keyword": "TRK"
+        },
+        "cityOfReceiver": {
+          "value": "AKKO",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "24104",
+          "keyword": "SHIP TO"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 495833578885,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "155077/1",
+          "keyword": "PROFORMA INVOICE"
+        },
+        "totalValue": {
+          "value": "48,000.00",
+          "keyword": "Total USD"
+        },
+        "incoterms": {
+          "value": "FCA",
+          "keyword": "Terms of Delivery"
+        },
+        "currency": {
+          "value": "USD",
+          "keyword": "Gross Amount"
+        },
+        "customsTarifNumber": {
+          "value": "85176200",
+          "keyword": "Tariff No"
+        },
+        "cityOfReceiver": {
+          "value": "NEW TAIPEI CITY",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "235",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "Althofen",
+          "keyword": "Delivered from"
+        },
+        "zipCodeOfShipper": {
+          "value": "9330",
+          "keyword": "Delivered from"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "16.70",
+          "keyword": "TotWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "TotWgt"
+        },
+        "airwaybillNumber": {
+          "value": "495833578885",
+          "keyword": "TRK"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 495833578966,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "159245/1",
+          "keyword": "PROFORMA INVOICE"
+        },
+        "totalValue": {
+          "value": "5,347.50",
+          "keyword": "Total USD"
+        },
+        "incoterms": {
+          "value": "FCA",
+          "keyword": "Terms of Delivery"
+        },
+        "currency": {
+          "value": "USD",
+          "keyword": "Gross Amount"
+        },
+        "customsTarifNumber": {
+          "value": "85269120",
+          "keyword": "Tariff No"
+        },
+        "cityOfReceiver": {
+          "value": "Singapore",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "486354",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "Althofen",
+          "keyword": "Delivered from"
+        },
+        "zipCodeOfShipper": {
+          "value": "9330",
+          "keyword": "Delivered from"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "2.40",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "495833578966",
+          "keyword": "TRK"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 643693071164,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "91634888",
+          "keyword": "Number/Date"
+        },
+        "totalValue": {
+          "value": "8,600.00",
+          "keyword": "Sum total"
+        },
+        "incoterms": {
+          "value": "FCA",
+          "keyword": "Terms of Delivery"
+        },
+        "currency": {
+          "value": "USD",
+          "keyword": "Currency"
+        },
+        "customsTarifNumber": {
+          "value": "39199080",
+          "keyword": "HSCODE"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "12.3",
+          "keyword": "TotWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "TotWgt"
+        },
+        "airwaybillNumber": {
+          "value": "643693071164",
+          "keyword": "TRK"
+        },
+        "cityOfReceiver": {
+          "value": "SCOTTSDALE",
+          "keyword": "SHIP TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "85255",
+          "keyword": "SHIP TO"
+        },
+        "cityOfShipper": {
+          "value": "Fehring",
+          "keyword": "From"
+        },
+        "zipCodeOfShipper": {
+          "value": "8350",
+          "keyword": "From"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 674077925534,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "20190060",
+          "keyword": "PROFORMA INVOICE"
+        },
+        "totalValue": {
+          "value": "4,310.00",
+          "keyword": "TOTAL"
+        },
+        "incoterms": {
+          "value": "EXW",
+          "keyword": "Secondary condition"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "Unit Price"
+        },
+        "customsTarifNumber": {
+          "value": "35079090",
+          "keyword": "Customs tariff number"
+        },
+        "cityOfReceiver": {
+          "value": "Oklahoma City",
+          "keyword": "DELIVERY ADDRESS"
+        },
+        "zipCodeOfReceiver": {
+          "value": "73104",
+          "keyword": "DELIVERY ADDRESS"
+        },
+        "cityOfShipper": {
+          "value": "Vienna",
+          "keyword": "Manufacturer"
+        },
+        "zipCodeOfShipper": {
+          "value": "1030",
+          "keyword": "Manufacturer"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "2.00",
+          "keyword": "ActWgt"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ActWgt"
+        },
+        "airwaybillNumber": {
+          "value": "674077925534",
+          "keyword": "TRK"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 775348620627,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "19110712",
+          "keyword": "PROFORMA INVOICE"
+        },
+        "totalValue": {
+          "value": "2,177.00",
+          "keyword": "Total"
+        },
+        "incoterms": {
+          "value": "Ex Works",
+          "keyword": "Pricing"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "CARRIAGE VALUE"
+        },
+        "customsTarifNumber": {
+          "value": "90279080",
+          "keyword": "Customs tariff code"
+        },
+        "cityOfReceiver": {
+          "value": "St. Petersburg",
+          "keyword": "IMR Environmental Equipment Inc."
+        },
+        "zipCodeOfReceiver": {
+          "value": "33711",
+          "keyword": "IMR Environmental Equipment Inc."
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "22.00",
+          "keyword": "TOTWGT"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "TOTWGT"
+        },
+        "airwaybillNumber": {
+          "value": "775348620627",
+          "keyword": "TRK"
+        },
+        "cityOfShipper": {
+          "value": "WIENER NEUSTADT",
+          "keyword": "ORIGIN ID"
+        },
+        "zipCodeOfShipper": {
+          "value": "2700",
+          "keyword": "ORIGIN ID"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 775366524401,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "so1758071",
+          "keyword": "Invoice"
+        },
+        "totalValue": {
+          "value": "2,754.00",
+          "keyword": "Total EUR"
+        },
+        "incoterms": {
+          "value": "EXW",
+          "keyword": "Terms of Delivery"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "Price"
+        },
+        "customsTarifNumber": {
+          "value": "38220000",
+          "keyword": "Tariff number"
+        },
+        "cityOfReceiver": {
+          "value": "Hong Kong",
+          "keyword": "Shipping address"
+        },
+        "zipCodeOfReceiver": {
+          "value": "",
+          "keyword": ""
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "9.50",
+          "keyword": "ACTWGT"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ACTWGT"
+        },
+        "airwaybillNumber": {
+          "value": "775366524401",
+          "keyword": "TRK"
+        },
+        "cityOfShipper": {
+          "value": "WIEN",
+          "keyword": "ORIGIN ID"
+        },
+        "zipCodeOfShipper": {
+          "value": "1150",
+          "keyword": "ORIGIN ID"
+        }
+      }
+    ]
+  },
+  {
+    "waybillnumber": 775366615568,
+    "documents": [
+      {
+        "type": "rechnung",
+        "invoiceNumber": {
+          "value": "PO19050",
+          "keyword": "CUSTOMER PURCHASE ORDER"
+        },
+        "totalValue": {
+          "value": "3,774.36",
+          "keyword": "TOTAL VALUE"
+        },
+        "incoterms": {
+          "value": "FCA",
+          "keyword": "DELIVERY TERMS"
+        },
+        "currency": {
+          "value": "EUR",
+          "keyword": "UNIT PRICE"
+        },
+        "customsTarifNumber": {
+          "value": "84139100",
+          "keyword": "H.S. Code"
+        },
+        "cityOfReceiver": {
+          "value": "DALIAN",
+          "keyword": "SHIPT TO"
+        },
+        "zipCodeOfReceiver": {
+          "value": "116600",
+          "keyword": "SHIP TO"
+        }
+      },
+      {
+        "type": "waybill",
+        "weight": {
+          "value": "1.60",
+          "keyword": "ACTWGT"
+        },
+        "weightUnit": {
+          "value": "KG",
+          "keyword": "ACTWGT"
+        },
+        "airwaybillNumber": {
+          "value": "775366615568",
+          "keyword": "TRK"
+        },
+        "cityOfShipper": {
+          "value": "VIENNA",
+          "keyword": "ORIGIN ID"
+        },
+        "zipCodeOfShipper": {
+          "value": "1300",
+          "keyword": "ORIGIN ID"
+        }
+      }
+    ]
+  }
+]

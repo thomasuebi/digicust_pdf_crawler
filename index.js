@@ -2,6 +2,10 @@ const fs = require("fs")
 const pdf = require("pdf-parse")
 const keywords = require("./data/keywords")
 
+const REGEX_INCOTERM = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS)/g;
+const REGEX_INVOICENO = /\d+(-?\d+)*/g;
+const REGEX_WEIGHTUNITS = /kg/g;
+
 let options = {
   pagerender: function(pageData) {
     let render_options = {
@@ -26,51 +30,101 @@ let options = {
   }
 }
 
-let dataBuffer = fs.readFileSync("tmp/input.pdf")
+// const FILE = './data/pdf/411496211270_sw_sw.pdf'
+// const FILE = './data/pdf/415924285504_sw.pdf'
+// const FILE = './data/pdf/737103956153_sw.pdf'
+// const FILE = './data/pdf/771388637848_sw.pdf'
+// const FILE = './data/pdf/789559645045_ocr.pdf'
 
-pdf(dataBuffer, options).then(function(data) {
-  const lowerCaseContent = data.text.toLowerCase()
-  console.log(data.text)
-  const numbers = getNumbers(lowerCaseContent)
-  const decimals = getDecimals(lowerCaseContent)
-  const result = {}
-  for (let [key, keyword] of Object.entries(keywords)) {
+const FIELDS = [
+  'totalValue',
+  'invoiceNumber',
+  'weight',
+  'incoterm',
+];
+
+function processPDF(path, fields = FIELDS) {
+  let dataBuffer = fs.readFileSync(path)
+
+  return pdf(dataBuffer, options).then(data => extractFields(data.text, fields));
+}
+
+function extractFields(text, fields) {
+  fs.writeFileSync("tmp/output.txt", text);
+
+  const result = {};
+  
+  const lowerCaseContent = text.toLowerCase();
+  const content = lowerCaseContent.replace(/—/g, '-');
+  
+  const numbers = getNumbers(content)
+  const decimals = getDecimals(content)
+  const incoterms = getMatches(text, REGEX_INCOTERM, 1);
+  const invoiceNo = getMatches(content, REGEX_INVOICENO, 0);
+  // const weightUnits = getMatches(content, )
+
+  for (let field of fields) {
+  //for (let [key, keyword] of Object.entries(keywords)) {
+    const keyword = keywords[field];
+
     let value = ""
     switch (keyword.valueFormat) {
       case "number":
         keyword.aliases.some(alias => {
-          const newValue = getNearestValue(
-            numbers,
-            getKeywordIndex(lowerCaseContent, alias)
-          )
-          if (newValue) {
-            value = newValue.value
+          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
+          const newValue = getNearestValue(numbers, aliasIndex);
+
+          // console.log('index (', alias, ')', aliasIndex);
+
+          if (aliasIndex !== -1 && newValue) {
+            value = newValue.value;
             return true
           }
         })
-        result[key] = value
+        result[field] = value
         break
+
+      case 'invoiceno':
+        result[field] = keyword.aliases.reduce((result, alias) => {
+          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
+
+          // console.log('index (', alias, ')', aliasIndex);
+
+          if (aliasIndex !== -1) {
+            const newValue = getNearestValue(invoiceNo, aliasIndex);
+
+            if (newValue) return newValue.value;
+          }
+          
+          return result;
+        }, "");
+        break;
+
       case "incoterm":
-        const regexp = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS)/g
-        const matches = getMatches(data.text, regexp, 1)
-        result[key] = matches[0].value
-        break
-      //   case "weight":
-      //     keyword.aliases.some(alias => {
-      //       const newValue = getNearestValue(
-      //         getArrayItems(lowerCaseContent, ["kg", "kilogram", "pound", "lb"]),
-      //         getKeywordIndex(lowerCaseContent, alias)
-      //       )
-      //       if (newValue) {
-      //         value = newValue.value
-      //         return true
-      //       }
-      //     })
-      //     result[key] = value
-      case "decimal":
+        // prevent crash if no incoterms found
+        if (incoterms.length === 0) {
+          result[field] = '';
+          break;
+        }
+
+        result[field] = keyword.aliases.reduce((result, alias) => {
+          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
+          // console.log('index (', alias, ')', aliasIndex);
+
+          if (aliasIndex !== -1) {
+            const newValue = getNearestValue(incoterms, aliasIndex);
+
+            if (newValue) return newValue.value;
+          }
+          
+          return result;
+        }, "");
+        break;
+
+      case "weight":
         keyword.aliases.some(alias => {
           const newValue = getNearestValue(
-            decimals,
+            getArrayItems(lowerCaseContent, ["kg", "kilogram", "pound", "lb"]),
             getKeywordIndex(lowerCaseContent, alias)
           )
           if (newValue) {
@@ -78,13 +132,32 @@ pdf(dataBuffer, options).then(function(data) {
             return true
           }
         })
-        result[key] = value
+        result[field] = value
+        break;
+
+      case "decimal":
+        keyword.aliases.some(alias => {
+          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
+          const newValue = getNearestValue(decimals, aliasIndex);
+
+          // console.log('index (', alias, ')', aliasIndex);
+          
+          if (aliasIndex !== -1 && newValue) {
+            // console.log('------\n', newValue, alias, '\n------');
+            // Todo: parse float (detect number format en vs de)
+            value = newValue.value;
+            return true
+          }
+        })
+        result[field] = value
         break
     }
   }
-  fs.writeFileSync("tmp/output.json", JSON.stringify(result))
-  console.log(result)
-})
+  // fs.writeFileSync("tmp/output.json", JSON.stringify(result))
+  // console.log(result)
+  
+  return result;
+}
 
 function getNumbers(text) {
   const regexp = /(([0-9]{2})+[0-9]*)/gi
@@ -111,13 +184,13 @@ function getArrayItems(text, array) {
 }
 
 function getKeywordIndex(text, keyword) {
-  return text.indexOf(keyword)
+  return text.indexOf(keyword);
 }
 
-function getMatches(string, regex, index) {
-  index || (index = 1) // default to the first capturing group
-  var matches = []
-  var match
+function getMatches(string, regex, index = 1) {
+  // index || (index = 1) // default to the first capturing group
+  var matches = [];
+  var match;
   while ((match = regex.exec(string))) {
     matches.push({ value: match[index], index: match.index })
   }
@@ -125,7 +198,16 @@ function getMatches(string, regex, index) {
 }
 
 function getNearestValue(arr, index) {
-  var i = arr.length
-  while (arr[--i].index > index && i > 0);
-  return arr[++i]
+  let i = 0;
+  const arrLength = arr.length;
+  while (arr[i].index < index) {
+    if (arrLength === i + 1) return undefined;
+    i++;
+  }
+  return arr[i];
 }
+
+module.exports = {
+  processPDF, 
+  extractFields,
+};
