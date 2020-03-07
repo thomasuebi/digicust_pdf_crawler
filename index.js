@@ -2,7 +2,7 @@ const fs = require("fs")
 const pdf = require("pdf-parse")
 const keywords = require("./data/keywords")
 
-const REGEX_INCOTERM = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS)/gi;
+const REGEX_INCOTERM = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS|Ex Works)/gi;
 const REGEX_INVOICENO = /\d+((-|\/)?\d+)*/g;
 const REGEX_WEIGHTUNITS = /kg/g;
 
@@ -116,7 +116,7 @@ class Extractor {
               const newValue = getNearestValue(incoterms, aliasIndex);
   
               if (newValue) {
-                value = newValue.value;
+                value = newValue.value === 'ex works' ? 'exw' : newValue.value;
                 return true;
               }
             }
@@ -229,19 +229,25 @@ function getNearestValue(arr, index) {
 
 module.exports = Extractor;
 
-const FILE = './data/pdf/495833578885_sw_ocr.pdf';
+const FILE = './data/pdf/775366615568_sw_ocr.pdf';
 
-// const FILE = './data/pdf/485013103425_sw_ocr.pdf';
-// const FILE = './data/pdf/415163116459_sw_ocr.pdf';
+// const FILE = './data/pdf/411496211270_sw_sw.pdf';
 // const FILE = './data/pdf/411496234926_sw_ocr.pdf';
-// const FILE = './data/pdf/411496211270_sw_sw.pdf'
+// const FILE = './data/pdf/415163116459_sw_ocr.pdf';
 // const FILE = './data/pdf/415924285504_sw.pdf'
-// const FILE = './data/pdf/737103956153_sw.pdf'
-// const FILE = './data/pdf/771388637848_sw.pdf'
-// const FILE = './data/pdf/789559645045_ocr.pdf'
+// const FILE = './data/pdf/485013103425_sw_ocr.pdf';
+// const FILE = './data/pdf/495833578885_sw_ocr.pdf';
+// const FILE = './data/pdf/495833578966_sw.pdf';
+// const FILE = './data/pdf/674077925534_sw_ocr.pdf';
+// const FILE = './data/pdf/643693071164_sw_ocr.pdf';
+// const FILE = './data/pdf/737103956153_sw.pdf';
+// const FILE = './data/pdf/771388637848_sw.pdf';
+// const FILE = './data/pdf/775348620627_sw_ocr.pdf';
+// const FILE = './data/pdf/775366524401_sw_ocr.pdf';
+// const FILE = './data/pdf/789559645045_ocr.pdf';
 
 // pdf2text(FILE);
 
 const e = new Extractor(true);
-// e.processPDF(FILE);
-e.processPDF(FILE, ['invoiceNumber']);
+e.processPDF(FILE);
+// e.processPDF(FILE, ['weight']);

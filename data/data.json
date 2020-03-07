@@ -772,7 +772,7 @@
       {
         "type": "rechnung",
         "invoiceNumber": {
-          "value": "so1758071",
+          "value": "so17580/1",
           "keyword": "Invoice"
         },
         "totalValue": {

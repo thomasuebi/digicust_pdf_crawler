@@ -1,10 +1,10 @@
 module.exports = {
   totalValue: {
-    aliases: ["total invoice amount", "finalamount", "totalusd", "end value", "total value", "totalvalue", "total invoice value", "total (eur)", "total usd"],
+    aliases: ["total invoice amount", "finalamount", "totalusd", "end value", "total value", "totalvalue", "total invoice value", "total (eur)", "total usd", "sum total", "total"],
     valueFormat: "decimal",
   },
   invoiceNumber: {
-    aliases: ['invoice no', 'invoiceno', 'invoice'],
+    aliases: ['proforma invoice', 'invoice no', 'invoiceno', 'invoice', 'number/date'],
     valueFormat: 'invoiceno',
   },
   weight: {
@@ -12,7 +12,7 @@ module.exports = {
     valueFormat: "decimal"
   },
   incoterm: {
-    aliases: ['delivery terms', 'termsofdelivery', 'terms of sale(incoterm)', 'incoterms', 'terms of delivery', 'terms of sale'],
+    aliases: ['secondary condition', 'delivery terms', 'termsofdelivery', 'terms of sale(incoterm)', 'incoterms', 'terms of delivery', 'terms of sale', 'pricing'],
     valueFormat: "incoterm"
   },
   weightUnit: {
