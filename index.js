@@ -229,7 +229,7 @@ function getNearestValue(arr, index) {
 
 module.exports = Extractor;
 
-const FILE = './data/pdf/775366615568_sw_ocr.pdf';
+
 
 // const FILE = './data/pdf/411496211270_sw_sw.pdf';
 // const FILE = './data/pdf/411496234926_sw_ocr.pdf';
@@ -244,10 +244,11 @@ const FILE = './data/pdf/775366615568_sw_ocr.pdf';
 // const FILE = './data/pdf/771388637848_sw.pdf';
 // const FILE = './data/pdf/775348620627_sw_ocr.pdf';
 // const FILE = './data/pdf/775366524401_sw_ocr.pdf';
+// const FILE = './data/pdf/775366615568_sw_ocr.pdf';
 // const FILE = './data/pdf/789559645045_ocr.pdf';
 
 // pdf2text(FILE);
 
-const e = new Extractor(true);
-e.processPDF(FILE);
+// const e = new Extractor(true);
+// e.processPDF(FILE);
 // e.processPDF(FILE, ['weight']);
