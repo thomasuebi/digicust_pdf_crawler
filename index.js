@@ -3,7 +3,7 @@ const pdf = require("pdf-parse")
 const keywords = require("./data/keywords")
 
 const REGEX_INCOTERM = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS)/gi;
-const REGEX_INVOICENO = /\d+(-?\d+)*/g;
+const REGEX_INVOICENO = /\d+((-|\/)?\d+)*/g;
 const REGEX_WEIGHTUNITS = /kg/g;
 
 let options = {
@@ -45,8 +45,8 @@ class Extractor {
   log(...args) {
     if (this.verbose) console.log(...args);
   }
-
-  extractFields(text, fields) {
+  
+  extractFields(text, fields = FIELDS) {
     // console.log(text);
   
     const result = {};
@@ -82,19 +82,22 @@ class Extractor {
           break
   
         case 'invoiceno':
-          result[field] = keyword.aliases.reduce((result, alias) => {
+          // create dictionary with alias and value and decide which one to choose
+          const candidates = keyword.aliases.reduce((arr, alias) => {
             const aliasIndex = getKeywordIndex(content, alias);
   
-            // console.log('index (', alias, ')', aliasIndex);
-  
             if (aliasIndex !== -1) {
-              const newValue = getNearestValue(invoiceNo, aliasIndex);
-  
-              if (newValue) return newValue.value;
+              const value = getNearestValue(invoiceNo, aliasIndex);
+
+              if (value) return [...arr, { alias, value: value.value }];
             }
-            
-            return result;
-          }, "");
+            return arr;
+          }, []);
+
+          this.log(candidates);
+
+          result[field] = candidates[0] && candidates[0].value;
+
           break;
   
         case "incoterm":
@@ -226,9 +229,11 @@ function getNearestValue(arr, index) {
 
 module.exports = Extractor;
 
-const FILE = './data/pdf/411496234926_sw_ocr.pdf';
-// const FILE = './data/pdf/415163116459_sw.pdf';
+const FILE = './data/pdf/495833578885_sw_ocr.pdf';
 
+// const FILE = './data/pdf/485013103425_sw_ocr.pdf';
+// const FILE = './data/pdf/415163116459_sw_ocr.pdf';
+// const FILE = './data/pdf/411496234926_sw_ocr.pdf';
 // const FILE = './data/pdf/411496211270_sw_sw.pdf'
 // const FILE = './data/pdf/415924285504_sw.pdf'
 // const FILE = './data/pdf/737103956153_sw.pdf'
@@ -237,7 +242,6 @@ const FILE = './data/pdf/411496234926_sw_ocr.pdf';
 
 // pdf2text(FILE);
 
-// const e = new Extractor(true);
-// e.processPDF(FILE, ['incoterm']);
-
-// processPDF(FILE).then(result => console.log(result));
+const e = new Extractor(true);
+// e.processPDF(FILE);
+e.processPDF(FILE, ['invoiceNumber']);

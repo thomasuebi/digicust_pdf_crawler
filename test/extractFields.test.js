@@ -5,87 +5,110 @@ const case3 = require('./data/737103956153.js');
 const case4 = require('./data/771388637848.js');
 const case5 = require('./data/789559645045.js');
 const case6 = require('./data/411496234926.js');
+const case7 = require('./data/415163116459.js');
+const case8 = require('./data/485013103425.js');
+const case9 = require('./data/495833578885.js');
 
 describe('extractFields', () => {
     const extractor = new Extractor();
 
+    const result1 = extractor.extractFields(case1);
+    const result2 = extractor.extractFields(case2);
+    const result3 = extractor.extractFields(case3);
+    const result4 = extractor.extractFields(case4);
+    const result5 = extractor.extractFields(case5);
+    const result6 = extractor.extractFields(case6);
+    const result7 = extractor.extractFields(case7);
+    const result8 = extractor.extractFields(case8);
+    const result9 = extractor.extractFields(case9);
+
     describe('Invoice Number', () => {
         test('411496211270', () => {
-            const result = extractor.extractFields(case1, ['invoiceNumber']);
-            expect(result.invoiceNumber).toBe('219244');
+            expect(result1.invoiceNumber).toBe('219244');
         });
         test('415924285504', () => {
-            const result = extractor.extractFields(case2, ['invoiceNumber']);
-            expect(result.invoiceNumber).toBe('90952120');
+            expect(result2.invoiceNumber).toBe('90952120');
         });
         test('771388637848', () => {
-            const result = extractor.extractFields(case4, ['invoiceNumber']);
-            expect(result.invoiceNumber).toBe('18-7678');
+            expect(result4.invoiceNumber).toBe('18-7678');
         });
         test('789559645045', () => {
-            const result = extractor.extractFields(case5, ['invoiceNumber']);
-            expect(result.invoiceNumber).toBe('91470164');
+            expect(result5.invoiceNumber).toBe('91470164');
         });
         test('411496234926', () => {
-            const result = extractor.extractFields(case6, ['invoiceNumber']);
-            expect(result.invoiceNumber).toBe('240504');
+            expect(result6.invoiceNumber).toBe('240504');
+        });
+        test('485013103425', () => {
+            expect(result8.invoiceNumber).toBe('2019102581');
         });
     });
 
     describe('Total Value', () => {
         test('411496211270', () => {
-            const result = extractor.extractFields(case1, ['totalValue']);
-            expect(result.totalValue).toBe('1549.88');
+            expect(result1.totalValue).toBe('1549.88');
         });
         test('737103956153', () => {
-            const result = extractor.extractFields(case3, ['totalValue']);
-            expect(result.totalValue).toBe('3,628.80');
+            expect(result3.totalValue).toBe('3,628.80');
         });
         test('771388637848', () => {
-            const result = extractor.extractFields(case4, ['totalValue']);
-            expect(result.totalValue).toBe('1.872,00');
+            expect(result4.totalValue).toBe('1.872,00');
         });
         test('789559645045', () => {
-            const result = extractor.extractFields(case5, ['totalValue']);
-            expect(result.totalValue).toBe('7,639.00');
+            expect(result5.totalValue).toBe('7,639.00');
         });
         test('411496234926', () => {
-            const result = extractor.extractFields(case6, ['totalValue']);
-            expect(result.totalValue).toBe('1868.35');
+            expect(result6.totalValue).toBe('1868.35');
+        });
+        test('415163116459', () => {
+            expect(result7.totalValue).toBe('1690.00');
+        });
+        test('485013103425', () => {
+            expect(result8.totalValue).toBe('1.590,00');
+        });
+        test('495833578885', () => {
+            expect(result9.totalValue).toBe('48,000.00');
         });
     });
 
     describe('Incoterm', () => {
         test('415924285504', () => {
-            const result = extractor.extractFields(case2, ['incoterm']);
-            expect(result.incoterm).toBe('EXW');
+            expect(result2.incoterm).toBe('EXW');
         });
         test('737103956153', () => {
-            const result = extractor.extractFields(case3, ['incoterm']);
-            expect(result.incoterm).toBe('FCA');
+            expect(result3.incoterm).toBe('FCA');
         });
         test('789559645045', () => {
-            const result = extractor.extractFields(case5, ['incoterm']);
-            expect(result.incoterm).toBe('CPT');
+            expect(result5.incoterm).toBe('CPT');
         });
         test('411496234926', () => {
-            const result = extractor.extractFields(case6, ['incoterm']);
-            expect(result.incoterm).toBe('EXW');
+            expect(result6.incoterm).toBe('EXW');
+        });
+        test('415163116459', () => {
+            expect(result7.incoterm).toBe('DAP');
+        });
+        test('485013103425', () => {
+            expect(result8.incoterm).toBe('DAP');
+        });
+        test('495833578885', () => {
+            expect(result9.incoterm).toBe('FCA');
         });
     });
 
     describe('Weight', () => {
         test('411496211270', () => {
-            const result = extractor.extractFields(case1, ['weight']);
-            expect(result.weight).toBe('27.70');
+            expect(result1.weight).toBe('27.70');
         });
         test('789559645045', () => {
-            const result = extractor.extractFields(case5, ['weight']);
-            expect(result.weight).toBe('6.70');
+            expect(result5.weight).toBe('6.70');
         });
         test('411496234926', () => {
-            const result = extractor.extractFields(case6, ['weight']);
-            expect(result.weight).toBe('4.70');
+            expect(result6.weight).toBe('4.70');
+        });
+        test('415163116459', () => {
+            expect(result7.weight).toBe('0.8');
+        });
+        test('485013103425', () => {
+            expect(result8.weight).toBe('36,00');
         });
     });
 });
