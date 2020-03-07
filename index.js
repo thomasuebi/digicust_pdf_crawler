@@ -2,7 +2,7 @@ const fs = require("fs")
 const pdf = require("pdf-parse")
 const keywords = require("./data/keywords")
 
-const REGEX_INCOTERM = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS)/g;
+const REGEX_INCOTERM = /(EXW|CIF|FCA|FOB|CFR|CIF|CIP|CPT|DAP|DAT|DDP|FAS)/gi;
 const REGEX_INVOICENO = /\d+(-?\d+)*/g;
 const REGEX_WEIGHTUNITS = /kg/g;
 
@@ -30,12 +30,6 @@ let options = {
   }
 }
 
-// const FILE = './data/pdf/411496211270_sw_sw.pdf'
-// const FILE = './data/pdf/415924285504_sw.pdf'
-// const FILE = './data/pdf/737103956153_sw.pdf'
-// const FILE = './data/pdf/771388637848_sw.pdf'
-// const FILE = './data/pdf/789559645045_ocr.pdf'
-
 const FIELDS = [
   'totalValue',
   'invoiceNumber',
@@ -43,120 +37,143 @@ const FIELDS = [
   'incoterm',
 ];
 
-function processPDF(path, fields = FIELDS) {
-  let dataBuffer = fs.readFileSync(path)
+class Extractor {
+  constructor(verbose = false) {
+    this.verbose = verbose;
+  }
 
-  return pdf(dataBuffer, options).then(data => extractFields(data.text, fields));
+  log(...args) {
+    if (this.verbose) console.log(...args);
+  }
+
+  extractFields(text, fields) {
+    // console.log(text);
+  
+    const result = {};
+    
+    const content = text.toLowerCase()
+                        .replace(/—/g, '-')
+                        .replace(/\s+/g, ' ');
+
+    const numbers = getNumbers(content)
+    const decimals = getDecimals(content)
+    const incoterms = getMatches(content, REGEX_INCOTERM, 1);
+    const invoiceNo = getMatches(content, REGEX_INVOICENO, 0);
+    // const weightUnits = getMatches(content, )
+  
+    for (let field of fields) {
+      const keyword = keywords[field];
+  
+      let value = ""
+      switch (keyword.valueFormat) {
+        case "number":
+          keyword.aliases.some(alias => {
+            const aliasIndex = getKeywordIndex(content, alias);
+            const newValue = getNearestValue(numbers, aliasIndex);
+  
+            // console.log('index (', alias, ')', aliasIndex);
+  
+            if (aliasIndex !== -1 && newValue) {
+              value = newValue.value;
+              return true
+            }
+          })
+          result[field] = value
+          break
+  
+        case 'invoiceno':
+          result[field] = keyword.aliases.reduce((result, alias) => {
+            const aliasIndex = getKeywordIndex(content, alias);
+  
+            // console.log('index (', alias, ')', aliasIndex);
+  
+            if (aliasIndex !== -1) {
+              const newValue = getNearestValue(invoiceNo, aliasIndex);
+  
+              if (newValue) return newValue.value;
+            }
+            
+            return result;
+          }, "");
+          break;
+  
+        case "incoterm":
+          // prevent crash if no incoterms found
+          if (incoterms.length === 0) {
+            result[field] = '';
+            break;
+          }
+  
+          keyword.aliases.some((alias) => {
+            const aliasIndex = getKeywordIndex(content, alias);
+            
+            this.log('index (', alias, ')', aliasIndex);
+  
+            if (aliasIndex !== -1) {
+              const newValue = getNearestValue(incoterms, aliasIndex);
+  
+              if (newValue) {
+                value = newValue.value;
+                return true;
+              }
+            }
+          });
+
+          result[field] = value.toUpperCase();
+          break;
+  
+        case "weight":
+          keyword.aliases.some(alias => {
+            const newValue = getNearestValue(
+              getArrayItems(content, ["kg", "kilogram", "pound", "lb"]),
+              getKeywordIndex(content, alias)
+            )
+            if (newValue) {
+              value = newValue.value
+              return true
+            }
+          })
+          result[field] = value
+          break;
+  
+        case "decimal":
+          keyword.aliases.some(alias => {
+            const aliasIndex = getKeywordIndex(content, alias);
+  
+            this.log('index (', alias, ')', aliasIndex);
+            
+            if (aliasIndex !== -1) {
+              const newValue = getNearestValue(decimals, aliasIndex);
+
+              // console.log('------\n', newValue, alias, '\n------');
+              // Todo: parse float (detect number format en vs de)
+              if (newValue) {
+                value = newValue.value;
+                return true;
+              }
+            }
+          });
+          result[field] = value;
+          break;
+      }
+    }
+    // fs.writeFileSync("tmp/output.json", JSON.stringify(result))
+    this.log(result)
+    
+    return result;
+  }
+
+  processPDF(path, fields = FIELDS) {
+    const dataBuffer = fs.readFileSync(path)
+  
+    return pdf(dataBuffer, options).then(data => this.extractFields(data.text, fields));
+  }
 }
 
-function extractFields(text, fields) {
-  fs.writeFileSync("tmp/output.txt", text);
+function pdf2text(path, outputPath = './tmp/output.txt') {
+  const dataBuffer = fs.readFileSync(path)
 
-  const result = {};
-  
-  const lowerCaseContent = text.toLowerCase();
-  const content = lowerCaseContent.replace(/—/g, '-');
-  
-  const numbers = getNumbers(content)
-  const decimals = getDecimals(content)
-  const incoterms = getMatches(text, REGEX_INCOTERM, 1);
-  const invoiceNo = getMatches(content, REGEX_INVOICENO, 0);
-  // const weightUnits = getMatches(content, )
-
-  for (let field of fields) {
-  //for (let [key, keyword] of Object.entries(keywords)) {
-    const keyword = keywords[field];
-
-    let value = ""
-    switch (keyword.valueFormat) {
-      case "number":
-        keyword.aliases.some(alias => {
-          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
-          const newValue = getNearestValue(numbers, aliasIndex);
-
-          // console.log('index (', alias, ')', aliasIndex);
-
-          if (aliasIndex !== -1 && newValue) {
-            value = newValue.value;
-            return true
-          }
-        })
-        result[field] = value
-        break
-
-      case 'invoiceno':
-        result[field] = keyword.aliases.reduce((result, alias) => {
-          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
-
-          // console.log('index (', alias, ')', aliasIndex);
-
-          if (aliasIndex !== -1) {
-            const newValue = getNearestValue(invoiceNo, aliasIndex);
-
-            if (newValue) return newValue.value;
-          }
-          
-          return result;
-        }, "");
-        break;
-
-      case "incoterm":
-        // prevent crash if no incoterms found
-        if (incoterms.length === 0) {
-          result[field] = '';
-          break;
-        }
-
-        result[field] = keyword.aliases.reduce((result, alias) => {
-          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
-          // console.log('index (', alias, ')', aliasIndex);
-
-          if (aliasIndex !== -1) {
-            const newValue = getNearestValue(incoterms, aliasIndex);
-
-            if (newValue) return newValue.value;
-          }
-          
-          return result;
-        }, "");
-        break;
-
-      case "weight":
-        keyword.aliases.some(alias => {
-          const newValue = getNearestValue(
-            getArrayItems(lowerCaseContent, ["kg", "kilogram", "pound", "lb"]),
-            getKeywordIndex(lowerCaseContent, alias)
-          )
-          if (newValue) {
-            value = newValue.value
-            return true
-          }
-        })
-        result[field] = value
-        break;
-
-      case "decimal":
-        keyword.aliases.some(alias => {
-          const aliasIndex = getKeywordIndex(lowerCaseContent, alias);
-          const newValue = getNearestValue(decimals, aliasIndex);
-
-          // console.log('index (', alias, ')', aliasIndex);
-          
-          if (aliasIndex !== -1 && newValue) {
-            // console.log('------\n', newValue, alias, '\n------');
-            // Todo: parse float (detect number format en vs de)
-            value = newValue.value;
-            return true
-          }
-        })
-        result[field] = value
-        break
-    }
-  }
-  // fs.writeFileSync("tmp/output.json", JSON.stringify(result))
-  // console.log(result)
-  
-  return result;
+  return pdf(dataBuffer, options).then(data => fs.writeFileSync(outputPath, data.text));
 }
 
 function getNumbers(text) {
@@ -207,7 +224,20 @@ function getNearestValue(arr, index) {
   return arr[i];
 }
 
-module.exports = {
-  processPDF, 
-  extractFields,
-};
+module.exports = Extractor;
+
+const FILE = './data/pdf/411496234926_sw_ocr.pdf';
+// const FILE = './data/pdf/415163116459_sw.pdf';
+
+// const FILE = './data/pdf/411496211270_sw_sw.pdf'
+// const FILE = './data/pdf/415924285504_sw.pdf'
+// const FILE = './data/pdf/737103956153_sw.pdf'
+// const FILE = './data/pdf/771388637848_sw.pdf'
+// const FILE = './data/pdf/789559645045_ocr.pdf'
+
+// pdf2text(FILE);
+
+// const e = new Extractor(true);
+// e.processPDF(FILE, ['incoterm']);
+
+// processPDF(FILE).then(result => console.log(result));

@@ -1,6 +1,6 @@
 module.exports = {
   totalValue: {
-    aliases: ["finalamount", "totalusd", "end value", "total value", "totalvalue"],
+    aliases: ["total invoice amount", "finalamount", "totalusd", "end value", "total value", "totalvalue"],
     valueFormat: "decimal",
   },
   invoiceNumber: {
@@ -15,17 +15,17 @@ module.exports = {
     aliases: ['termsofdelivery', 'terms of sale(incoterm)', 'incoterms', 'terms of delivery'],
     valueFormat: "incoterm"
   },
-  // weightUnit: {
-  //   aliases: ["weight unit", "weightunit", "unit"],
-  //   valueFormat: "weight"
-  // },
-  // airwayBill: {
-  //   aliases: [
-  //     "airwaybill",
-  //     "airway bill",
-  //     "airway bill no",
-  //     "airway bill number"
-  //   ],
-  //   valueFormat: "number"
-  // }
+  weightUnit: {
+    aliases: ["weight unit", "weightunit", "unit"],
+    valueFormat: "weight"
+  },
+  airwayBill: {
+    aliases: [
+      "airwaybill",
+      "airway bill",
+      "airway bill no",
+      "airway bill number"
+    ],
+    valueFormat: "number"
+  }
 }
